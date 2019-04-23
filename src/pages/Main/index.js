@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 
-// styles
+// components
+import CompareList from '../../components/CompareList/index';
+
+// global styles
 import GlobalStyle from '../../styles/global';
 
 // styled components
@@ -17,6 +20,7 @@ const Main = () => (
         <input type="text" placeholder="user/repository" />
         <button type="submit">OK</button>
       </Form>
+      <CompareList />
     </Container>
   </Fragment>
 );
