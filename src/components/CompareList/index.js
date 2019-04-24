@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container, Card } from './styles';
 
@@ -31,36 +32,23 @@ const CompareList = ({ repositories }) => (
         </ul>
       </Card>
     ))}
-    {/* <Card>
-      <header>
-        <img src="https://avatars3.githubusercontent.com/u/69631?v=4" alt="User avatar" />
-        <strong>react</strong>
-        <small>facebook</small>
-      </header>
-      <ul>
-        <li>
-          95,019
-          <small>users</small>
-        </li>
-        <li>
-          17,891
-          <small>forks</small>
-        </li>
-        <li>
-          232
-          <small>contributors</small>
-        </li>
-        <li>
-          167
-          <small>open issues</small>
-        </li>
-        <li>
-          3 days ago
-          <small>last commit</small>
-        </li>
-      </ul>
-    </Card> */}
   </Container>
 );
+
+CompareList.propTypes = {
+  repositories: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      stargazers_count: PropTypes.number,
+      forks_count: PropTypes.number,
+      open_issues_count: PropTypes.number,
+      lastCommit: PropTypes.string,
+      owner: PropTypes.shape({
+        avatar_url: PropTypes.string,
+        login: PropTypes.string,
+      }),
+    }),
+  ).isRequired,
+};
 
 export default CompareList;
