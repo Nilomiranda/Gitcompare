@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import api from '../../services/api';
+import moment from 'moment';
 
 // components
 import CompareList from '../../components/CompareList/index';
@@ -26,9 +27,10 @@ export default class Main extends Component {
 
   handleUserSubmit = async e => {
     e.preventDefault();
-    const { data } = await api.get(`/repos/${this.state.repositoryInput}`);
+    const { data: repository } = await api.get(`/repos/${this.state.repositoryInput}`);
+    repository.lastCommit = moment(repository.pushed_at).fromNow();
     this.setState({
-      repositories: [...this.state.repositories, data],
+      repositories: [...this.state.repositories, repository],
       repositoryInput: '',
     });
   };
