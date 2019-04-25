@@ -18,6 +18,7 @@ export default class Main extends Component {
   state = {
     submitError: false,
     repositoryInput: '',
+    inputPlaceholder: 'user/repository',
     repositories: [],
     loading: false,
   };
@@ -75,7 +76,8 @@ export default class Main extends Component {
       console.log(err);
       this.setState({
         submitError: true,
-        repositoryInput: 'Repository not found 😢😢😢',
+        repositoryInput: '',
+        inputPlaceholder: 'Repository not found 😢😢😢',
       });
     } finally {
       this.setState({ loading: false });
@@ -108,7 +110,7 @@ export default class Main extends Component {
           <Form error={this.state.submitError} onSubmit={e => this.handleUserSubmit(e)}>
             <input
               type="text"
-              placeholder="user/repository"
+              placeholder={this.state.inputPlaceholder}
               onChange={e => this.handleInputChange(e)}
               value={this.state.repositoryInput}
             />
