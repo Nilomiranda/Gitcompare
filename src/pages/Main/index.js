@@ -31,15 +31,48 @@ export default class Main extends Component {
   handleUserSubmit = async e => {
     e.preventDefault();
     this.setState({ loading: true });
+
+    // searching for existing repos in local storage (array)
+    const existingRepos = JSON.parse(localStorage.getItem('repositories'));
+
     try {
       const { data: repository } = await api.get(`/repos/${this.state.repositoryInput}`);
-      repository.lastCommit = moment(repository.pushed_at).fromNow();
-      this.setState({
-        repositories: [...this.state.repositories, repository],
-        repositoryInput: '',
-        submitError: false,
-      });
+
+      if (existingRepos) {
+        const sameRepo = existingRepos.filter(repo => repo.id === repository.id);
+
+        if (sameRepo.length > 0) {
+          return;
+        } else {
+          repository.lastCommit = moment(repository.pushed_at).fromNow();
+
+          this.setState({
+            repositories: [...this.state.repositories, repository],
+            repositoryInput: '',
+            submitError: false,
+          });
+
+          //saving repositories to localstorage
+          const saveRepo = JSON.stringify(this.state.repositories);
+
+          localStorage.setItem('repositories', saveRepo);
+        }
+      } else {
+        repository.lastCommit = moment(repository.pushed_at).fromNow();
+
+        this.setState({
+          repositories: [...this.state.repositories, repository],
+          repositoryInput: '',
+          submitError: false,
+        });
+
+        //saving repositories to localstorage
+        const saveRepo = JSON.stringify(this.state.repositories);
+
+        localStorage.setItem('repositories', saveRepo);
+      }
     } catch (err) {
+      console.log(err);
       this.setState({
         submitError: true,
         repositoryInput: 'Repository not found 😢😢😢',
