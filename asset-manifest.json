@@ -1,14 +1,14 @@
 {
-  "main.js": "/gitcompare/static/js/main.b3493fa9.chunk.js",
-  "main.js.map": "/gitcompare/static/js/main.b3493fa9.chunk.js.map",
-  "runtime~main.js": "/gitcompare/static/js/runtime~main.8455338b.js",
-  "runtime~main.js.map": "/gitcompare/static/js/runtime~main.8455338b.js.map",
-  "static/css/2.0223d4ec.chunk.css": "/gitcompare/static/css/2.0223d4ec.chunk.css",
-  "static/js/2.3376abd1.chunk.js": "/gitcompare/static/js/2.3376abd1.chunk.js",
-  "static/js/2.3376abd1.chunk.js.map": "/gitcompare/static/js/2.3376abd1.chunk.js.map",
-  "index.html": "/gitcompare/index.html",
-  "precache-manifest.1a7ebe23767953160a1b900ef1a37f19.js": "/gitcompare/precache-manifest.1a7ebe23767953160a1b900ef1a37f19.js",
-  "service-worker.js": "/gitcompare/service-worker.js",
-  "static/css/2.0223d4ec.chunk.css.map": "/gitcompare/static/css/2.0223d4ec.chunk.css.map",
-  "static/media/font-awesome.css": "/gitcompare/static/media/fontawesome-webfont.fee66e71.woff"
+  "main.js": "/Gitcompare/static/js/main.b3493fa9.chunk.js",
+  "main.js.map": "/Gitcompare/static/js/main.b3493fa9.chunk.js.map",
+  "runtime~main.js": "/Gitcompare/static/js/runtime~main.47be4143.js",
+  "runtime~main.js.map": "/Gitcompare/static/js/runtime~main.47be4143.js.map",
+  "static/css/2.3dbc785e.chunk.css": "/Gitcompare/static/css/2.3dbc785e.chunk.css",
+  "static/js/2.fcc9de8d.chunk.js": "/Gitcompare/static/js/2.fcc9de8d.chunk.js",
+  "static/js/2.fcc9de8d.chunk.js.map": "/Gitcompare/static/js/2.fcc9de8d.chunk.js.map",
+  "index.html": "/Gitcompare/index.html",
+  "precache-manifest.0236509e7280112251a613932b554191.js": "/Gitcompare/precache-manifest.0236509e7280112251a613932b554191.js",
+  "service-worker.js": "/Gitcompare/service-worker.js",
+  "static/css/2.3dbc785e.chunk.css.map": "/Gitcompare/static/css/2.3dbc785e.chunk.css.map",
+  "static/media/font-awesome.css": "/Gitcompare/static/media/fontawesome-webfont.fee66e71.woff"
 }
