@@ -82,6 +82,23 @@ export default class Main extends Component {
     }
   };
 
+  componentDidMount() {
+    /**
+     * let's check if the user has any repository saved in his local storage
+     * if so, we first render this repositories
+     */
+
+    const existingRepos = JSON.parse(localStorage.getItem('repositories'));
+
+    console.log({ existingRepos });
+
+    if (!existingRepos) return; // exist if no repository is found
+
+    this.setState({
+      repositories: existingRepos,
+    });
+  }
+
   render() {
     return (
       <Fragment>
