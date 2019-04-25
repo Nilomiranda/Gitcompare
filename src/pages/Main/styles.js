@@ -19,10 +19,13 @@ export const Form = styled.form`
   input {
     width: 70%;
     border-radius: 3px;
-    border: none;
     padding-left: 20px;
     font-size: 1rem;
     font-weight: bold;
+
+    border: ${props => (props.error ? '2px solid #F00' : 0)};
+    background-color: ${props => (props.error ? '#f7c0c0' : '#FFF')};
+    color: ${props => (props.error ? '#ff6060' : 'initial')};
   }
 
   button {

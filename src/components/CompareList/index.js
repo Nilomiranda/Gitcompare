@@ -35,6 +35,7 @@ const CompareList = ({ repositories }) => (
   </Container>
 );
 
+// props validations
 CompareList.propTypes = {
   repositories: PropTypes.arrayOf(
     PropTypes.shape({
