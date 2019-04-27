@@ -2,6 +2,8 @@
 
 A simple app built with React to fetch github project and put them side by side.
 
+![Screenshoot](/public/screenshot.png)
+
 Each github project will be presented in a card with the following information:
 
 - Number of stars
