@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import 'font-awesome/css/font-awesome.css';
 
 import {
   Container, Card, DeleteButton, UpdateButton,
 } from './styles';
 
-const CompareList = ({ repositories }) => (
+const CompareList = ({
+  repositories, update, erase, loading,
+}) => (
   <Container>
     {repositories.map(repository => (
       <Card key={repository.id}>
@@ -32,8 +35,10 @@ const CompareList = ({ repositories }) => (
             <small>last commit</small>
           </li>
         </ul>
-        <UpdateButton type="button">Update</UpdateButton>
-        <DeleteButton type="button" onClick={() => this.props.delete(repository)} data={repository}>
+        <UpdateButton type="button" onClick={() => update(repository)}>
+          {loading ? <i className="fa fa-spinner fa-pulse" /> : 'Update'}
+        </UpdateButton>
+        <DeleteButton type="button" onClick={() => erase(repository)}>
           Delete
         </DeleteButton>
       </Card>

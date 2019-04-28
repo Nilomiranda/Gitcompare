@@ -18,17 +18,15 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
 
-    // this.handleDelete = this.handleDelete.bind(this);
-
     this.state = {
       submitError: false,
       repositoryInput: '',
       inputPlaceholder: 'user/repository',
       repositories: [],
       loading: false,
+      updateLoading: false,
     };
   }
-
 
   handleInputChange = e => {
     this.setState({
@@ -91,12 +89,39 @@ export default class Main extends Component {
     }
   };
 
-  handleDelete = async (repository) => {
+  handleUpdate = async repository => {
+    const { login } = repository.owner;
+    const { name } = repository;
+
+    this.setState({ updateLoading: true });
+
     const repositoriesList = await JSON.parse(localStorage.getItem('repositories'));
 
+    // fetching the choosen repository again
+    const { data: newRepoInformation } = await api.get(`/repos/${login}/${name}`);
+
+    newRepoInformation.lastCommit = moment(repository.pushed_at).fromNow();
+
+    // checking repository position in repositories list
+    const repoPosition = repositoriesList.findIndex(repo => repo.id === repository.id);
+
+    // replacing repository, with the updated one
+    repositoriesList.splice(repoPosition, 1, newRepoInformation);
+
+    // updatinf local storage
+    await localStorage.setItem('repositories', JSON.stringify(repositoriesList));
+
+    // updating state
+    this.setState({ repositories: repositoriesList, updateLoading: false });
+  };
+
+  handleDelete = async repository => {
+    const repositoriesList = await JSON.parse(localStorage.getItem('repositories'));
+
+    // checking the choosen repo in the repositories list
     const repoPosition = repositoriesList.findIndex(repo => {
       return repo.id === repository.id;
-    })
+    });
 
     repositoriesList.splice(repoPosition, 1); // removing repository
 
@@ -140,8 +165,10 @@ export default class Main extends Component {
             </button>
           </Form>
           <CompareList
-            delete={(repository) => this.handleDelete(repository)}
+            erase={repository => this.handleDelete(repository)}
+            update={repository => this.handleUpdate(repository)}
             repositories={this.state.repositories}
+            loading={this.state.updateLoading}
           />
         </Container>
       </Fragment>
