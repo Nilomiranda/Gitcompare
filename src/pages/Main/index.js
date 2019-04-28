@@ -15,13 +15,20 @@ import { Container, Form } from './styles';
 import logo from '../../assets/gitcompare-logo.png';
 
 export default class Main extends Component {
-  state = {
-    submitError: false,
-    repositoryInput: '',
-    inputPlaceholder: 'user/repository',
-    repositories: [],
-    loading: false,
-  };
+  constructor(props) {
+    super(props);
+
+    // this.handleDelete = this.handleDelete.bind(this);
+
+    this.state = {
+      submitError: false,
+      repositoryInput: '',
+      inputPlaceholder: 'user/repository',
+      repositories: [],
+      loading: false,
+    };
+  }
+
 
   handleInputChange = e => {
     this.setState({
@@ -34,7 +41,7 @@ export default class Main extends Component {
     this.setState({ loading: true });
 
     // searching for existing repos in local storage (array)
-    const existingRepos = JSON.parse(localStorage.getItem('repositories'));
+    const existingRepos = await JSON.parse(localStorage.getItem('repositories'));
 
     try {
       const { data: repository } = await api.get(`/repos/${this.state.repositoryInput}`);
@@ -56,7 +63,7 @@ export default class Main extends Component {
           //saving repositories to localstorage
           const saveRepo = JSON.stringify(this.state.repositories);
 
-          localStorage.setItem('repositories', saveRepo);
+          await localStorage.setItem('repositories', saveRepo);
         }
       } else {
         repository.lastCommit = moment(repository.pushed_at).fromNow();
@@ -84,15 +91,29 @@ export default class Main extends Component {
     }
   };
 
-  componentDidMount() {
+  handleDelete = async (repository) => {
+    const repositoriesList = await JSON.parse(localStorage.getItem('repositories'));
+
+    const repoPosition = repositoriesList.findIndex(repo => {
+      return repo.id === repository.id;
+    })
+
+    repositoriesList.splice(repoPosition, 1); // removing repository
+
+    // updating local storage
+    await localStorage.setItem('repositories', JSON.stringify(repositoriesList));
+
+    // updating components state with new repositories list
+    this.setState({ repositories: repositoriesList });
+  };
+
+  async componentDidMount() {
     /**
      * let's check if the user has any repository saved in his local storage
      * if so, we first render this repositories
      */
 
-    const existingRepos = JSON.parse(localStorage.getItem('repositories'));
-
-    console.log({ existingRepos });
+    const existingRepos = await JSON.parse(localStorage.getItem('repositories'));
 
     if (!existingRepos) return; // exist if no repository is found
 
@@ -118,7 +139,10 @@ export default class Main extends Component {
               {this.state.loading ? <i className="fa fa-spinner fa-pulse" /> : 'OK'}
             </button>
           </Form>
-          <CompareList repositories={this.state.repositories} />
+          <CompareList
+            delete={(repository) => this.handleDelete(repository)}
+            repositories={this.state.repositories}
+          />
         </Container>
       </Fragment>
     );

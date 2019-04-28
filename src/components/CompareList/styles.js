@@ -50,3 +50,21 @@ export const Card = styled.div`
     }
   }
 `;
+
+export const DeleteButton = styled.button`
+  width: 70%;
+  padding: 20px;
+  align-self: center;
+  margin: 15px;
+  border: none;
+  background-color: #c12a2a;
+  color: #fff;
+  font-size: 1.01em;
+  font-weight: bolder;
+  border-radius: 7px;
+
+  &:hover {
+    transform: translateY(-2px);
+    cursor: pointer;
+  }
+`;

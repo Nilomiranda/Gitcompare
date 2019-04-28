@@ -2,7 +2,7 @@
   "name": "a02",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nilomiranda.github.io/gitcompare",
+  "homepage": "https://nilomiranda.github.io/Gitcompare",
   "dependencies": {
     "axios": "^0.18.0",
     "eslint-loader": "^2.1.2",
