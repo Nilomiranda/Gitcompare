@@ -68,3 +68,21 @@ export const DeleteButton = styled.button`
     cursor: pointer;
   }
 `;
+
+export const UpdateButton = styled.button`
+  width: 70%;
+  padding: 20px;
+  align-self: center;
+  margin: 15px;
+  border: none;
+  background-color: #009e51;
+  color: #fff;
+  font-size: 1.01em;
+  font-weight: bolder;
+  border-radius: 7px;
+
+  &:hover {
+    transform: translateY(-2px);
+    cursor: pointer;
+  }
+`;
