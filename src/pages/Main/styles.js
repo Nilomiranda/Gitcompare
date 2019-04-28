@@ -46,3 +46,13 @@ export const Form = styled.form`
     }
   }
 `;
+
+export const EmptyCard = styled.div`
+  width: 400px;
+  height: auto;
+  background-color: #fff;
+  margin-top: 50px;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 1.5rem;
+`;

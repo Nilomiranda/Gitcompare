@@ -10,7 +10,7 @@ import CompareList from '../../components/CompareList/index';
 import GlobalStyle from '../../styles/global';
 
 // styled components
-import { Container, Form } from './styles';
+import { Container, Form, EmptyCard } from './styles';
 
 import logo from '../../assets/gitcompare-logo.png';
 
@@ -164,12 +164,23 @@ export default class Main extends Component {
               {this.state.loading ? <i className="fa fa-spinner fa-pulse" /> : 'OK'}
             </button>
           </Form>
-          <CompareList
-            erase={repository => this.handleDelete(repository)}
-            update={repository => this.handleUpdate(repository)}
-            repositories={this.state.repositories}
-            loading={this.state.updateLoading}
-          />
+          {this.state.repositories.length > 0 ? (
+            <CompareList
+              erase={repository => this.handleDelete(repository)}
+              update={repository => this.handleUpdate(repository)}
+              repositories={this.state.repositories}
+              loading={this.state.updateLoading}
+            />
+          ) : (
+            <EmptyCard>
+              <p>
+                You don't have any repository added. Start by adding one using the field above.
+                Provide the owner of the repository and the repository name.
+              </p>
+              <br />
+              <p>Example: facebook/react</p>
+            </EmptyCard>
+          )}
         </Container>
       </Fragment>
     );
